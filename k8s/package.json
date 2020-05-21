@@ -1,0 +1,8 @@
+{
+    "name": "wb-msg",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "egg-scripts start --port 8000"
+    },
+    "license": "ISC"
+}

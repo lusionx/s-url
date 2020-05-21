@@ -1,0 +1,63 @@
+{
+    "name": "wb-msg",
+    "version": "1.0.0",
+    "description": "wechat component proxy",
+    "private": true,
+    "egg": {
+        "typescript": true,
+        "declarations": true
+    },
+    "scripts": {
+        "start": "egg-scripts start --daemon --title=egg-server-egg",
+        "stop": "egg-scripts stop --title=egg-server-egg",
+        "dev": "egg-bin dev",
+        "debug": "egg-bin debug",
+        "kue": "kue-dashboard -p 7009 -r redis://127.0.0.1/1",
+        "test-local": "egg-bin test",
+        "test": "npm run lint -- --fix && npm run test-local",
+        "cov": "egg-bin cov",
+        "tsc": "ets && tsc -p tsconfig.json",
+        "ci": "npm run lint && npm run cov && npm run tsc",
+        "autod": "autod",
+        "lint": "tslint --project . -c tslint.json",
+        "clean": "ets clean"
+    },
+    "dependencies": {
+        "axios": "^0.18.0",
+        "egg": "^2.6.1",
+        "egg-scripts": "^2.6.0",
+        "moment": "^2.24.0",
+        "mongodb": "^3.5.7"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.40",
+        "@types/mongodb": "^3.5.18",
+        "@types/node": "^7.0.12",
+        "@types/supertest": "^2.0.0",
+        "@types/yargs": "^13.0.0",
+        "autod": "^3.0.1",
+        "autod-egg": "^1.1.0",
+        "egg-bin": "^4.11.0",
+        "egg-ci": "^1.8.0",
+        "egg-mock": "^3.16.0",
+        "tslib": "^1.9.0",
+        "tslint": "^5.0.0",
+        "tslint-config-egg": "^1.0.0",
+        "typescript": "^3.4.0"
+    },
+    "engines": {
+        "node": ">=10.10.0"
+    },
+    "ci": {
+        "version": "8"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "eslintIgnore": [
+        "coverage"
+    ],
+    "author": "liuxing",
+    "license": "MIT"
+}
