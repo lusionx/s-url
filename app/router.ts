@@ -1,7 +1,8 @@
 import { Application } from 'egg'
 
 export default (app: Application) => {
-    const { controller, router } = app
-
-    router.get('/', controller.home.index)
+    const { controller: c, router: r } = app
+    r.get('/dev', c.home.index)
+    r.post('/s', c.home.save)
+    r.get('/:id', c.home.get)
 }
