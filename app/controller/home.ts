@@ -17,7 +17,7 @@ export default class HomeController extends Controller {
     public async index() {
         let mid = this.app.mid // 3 bit
         let incr = this.app.incr // 13 bit
-        this.ctx.body = { mid, incr }
+        this.ctx.body = { mid, incr, host: process.env['HOSTNAME'] }
     }
 
     public async save() {

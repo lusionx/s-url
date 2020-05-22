@@ -7,5 +7,8 @@ export default () => {
         consoleLevel: 'DEBUG',
         dir: '/var/log',
     }
+    config.es = {
+        docUrl: "http://esv5.yc.besth5.com/s-url/docs",
+    }
     return config
 }

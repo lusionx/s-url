@@ -1,0 +1,13 @@
+{
+    "docs": {
+        "properties": {
+            "ctime": {
+                "type": "date",
+                "format": "dateOptionalTime"
+            },
+            "url": {
+                "type": "keyword"
+            }
+        }
+    }
+}
