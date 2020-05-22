@@ -6,16 +6,14 @@ RUN echo "hosts: files dns" > /etc/nsswitch.conf
 
 WORKDIR /srv/
 
-RUN npm --registry=https://registry.npm.taobao.org install axios@0.18 egg@2.6 egg-scripts@2.11 kue@0.11 moment@2.24 fast-xml-parser@3
+RUN npm --registry=https://registry.npm.taobao.org install axios@0.18 egg@2.26 egg-scripts@2.13 moment@2.26
 
 VOLUME /var/log
 
 COPY *.js /srv/
 COPY app /srv/app/
-COPY bin /srv/bin/
 COPY config /srv/config/
 COPY model /srv/model/
-COPY worker /srv/worker/
 
 COPY k8s/package.json /srv/
 
