@@ -6,7 +6,7 @@ RUN echo "hosts: files dns" > /etc/nsswitch.conf
 
 WORKDIR /srv/
 
-RUN npm --registry=https://registry.npm.taobao.org install axios@0.18 egg@2.26 egg-scripts@2.13 moment@2.26
+RUN npm --registry=https://registry.npm.taobao.org install axios@0.18 egg@2.26 egg-scripts@2.13 moment@2.26 tslib@1.13
 
 VOLUME /var/log
 

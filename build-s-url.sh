@@ -11,4 +11,4 @@ docker build -f k8s/Dockerfile -t hub.mlamp.cn/tuice/s-url:${VERSION} .
 
 git checkout k8s/package.json
 
-docker push hub.mlamp.cn/tuice/wb-msg:${VERSION}
+docker push hub.mlamp.cn/tuice/s-url:${VERSION}
