@@ -15,6 +15,9 @@ export default (appInfo: EggAppInfo) => {
         es: {
             docUrl: "http://esv5.yc.besth5.com/dev/docs",
         },
+        web: {
+            host: 'http://127.0.0.1'
+        }
     };
 
     // the return config will combines to EggAppConfig

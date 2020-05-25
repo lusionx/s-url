@@ -27,7 +27,7 @@ export default class HomeController extends Controller {
         }
         let r = /^[a-zA-Z0-9]+$/
         let sid = ''
-        let app = this.app
+        let { app, ctx } = this
         const { config, axios } = this.app
         do {
             let time = moment().unix().toString(16) // 4byte hex
@@ -38,8 +38,8 @@ export default class HomeController extends Controller {
         } while (!sid)
         let doc: DocUrl = { url, ctime: moment().utcOffset(8).format() }
         let resp = await axios.post(config.es.docUrl + '/' + sid + '/_update', { doc, doc_as_upsert: true })
-        this.ctx.status = resp.status
-        this.ctx.body = { sid, status: resp.status }
+        ctx.status = resp.status
+        ctx.body = { sid, status: resp.status, t: config.web.host + '/' + sid }
     }
 
     public async get() {
