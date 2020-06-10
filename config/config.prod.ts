@@ -8,7 +8,7 @@ export default () => {
         dir: '/var/log',
     }
     config.es = {
-        docUrl: "http://esv5.yc.besth5.com/s-url/docs",
+        docUrl: process.env["ES_DOCURL"] || "http://esv5.yc.besth5.com/s-url/docs",
     }
     config.web = {
         host: 'http://t.n1q.cn'

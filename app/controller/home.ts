@@ -1,5 +1,6 @@
 import { Controller } from 'egg'
 import moment from 'moment'
+import { sleep } from '../../model/tool'
 
 interface DocUrl {
     url: string
@@ -34,7 +35,11 @@ export default class HomeController extends Controller {
             let end = app.mid + app.incr // 3 + 13 bit
             end = parseInt(end, 2).toString(16) // 2byte hex
             let bid = Buffer.from(time + end, 'hex').toString('base64')
-            sid = r.test(bid) ? bid : sid
+            if (r.test(bid)) {
+                sid = bid
+            } else {
+                await sleep(100)
+            }
         } while (!sid)
         let doc: DocUrl = { url, ctime: moment().utcOffset(8).format() }
         let resp = await axios.post(config.es.docUrl + '/' + sid + '/_update', { doc, doc_as_upsert: true })
