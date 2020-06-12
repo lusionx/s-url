@@ -1,6 +1,5 @@
 import { Controller } from 'egg'
 import moment from 'moment'
-import { sleep } from '../../model/tool'
 
 interface DocUrl {
     url: string
@@ -27,18 +26,25 @@ export default class HomeController extends Controller {
             return this.ctx.bizError(400, {}, 'url')
         }
         let r = /^[a-zA-Z0-9]+$/
-        let sid = ''
         let { app, ctx } = this
         const { config, axios } = this.app
+        let time = ""
+        let i = 0
         do {
-            let time = moment().unix().toString(16) // 4byte hex
+            const t = moment().subtract(i * 256, 's').unix().toString(16) // 4byte 32bit hex
+            i++ // 通过减 [24]bit 上的数字防特殊字符
+            const t3 = Buffer.from(t.slice(0, 6), 'hex').toString('base64')
+            if (r.test(t3)) {
+                time = t
+            }
+        } while (!time)
+        let sid = ''
+        do {
             let end = app.mid + app.incr // 3 + 13 bit
             end = parseInt(end, 2).toString(16) // 2byte hex
             let bid = Buffer.from(time + end, 'hex').toString('base64')
             if (r.test(bid)) {
                 sid = bid
-            } else {
-                await sleep(100)
             }
         } while (!sid)
         let doc: DocUrl = { url, ctime: moment().utcOffset(8).format() }
