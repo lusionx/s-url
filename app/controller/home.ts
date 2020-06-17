@@ -28,24 +28,19 @@ export default class HomeController extends Controller {
         let r = /^[a-zA-Z0-9]+$/
         let { app, ctx } = this
         const { config, axios } = this.app
-        let time = ""
+        let sid = ''
         let i = 0
         do {
-            const t = moment().subtract(i * 256, 's').unix().toString(16) // 4byte 32bit hex
-            i++ // 通过减 [24]bit 上的数字防特殊字符
-            const t3 = Buffer.from(t.slice(0, 6), 'hex').toString('base64')
-            if (r.test(t3)) {
-                time = t
-            }
-        } while (!time)
-        let sid = ''
-        do {
+            const time = moment().subtract(i, 's').unix().toString(16) // 4byte 32bit hex
             let end = app.mid + app.incr // 3 + 13 bit
             end = parseInt(end, 2).toString(16) // 2byte hex
             let bid = Buffer.from(time + end, 'hex').toString('base64')
             if (r.test(bid)) {
                 sid = bid
+            } if (i >= 15) { // 多次丢弃后还不行, 则使用替换的方式
+                sid = bid.replace(/\//g, '1').replace(/\+/g, '0')
             }
+            i++
         } while (!sid)
         let doc: DocUrl = { url, ctime: moment().utcOffset(8).format() }
         let resp = await axios.post(config.es.docUrl + '/' + sid + '/_update', { doc, doc_as_upsert: true })
